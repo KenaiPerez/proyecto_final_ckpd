@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Programacion III</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+	<link rel="stylesheet" href="bootstrap (1).css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script>
+    <style>
+        *{
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+        #misdatos {
+			padding-top: 100px;
+			padding-bottom: 50px;
+            text-align: center;
+        }
+		#container{
+			margin-top: 30px;
+			margin-bottom: 30px;
+			justify-content: center;
+			display:flex;
+		}
+        #productos{
+			text-align: center;
+			display: flex;
+			align-items: center;
+			max-width: 1200px;
+
+        }
+		#producto{
+			font-size:15px;
+			padding-left: 20px;
+			padding-right: 20px;
+			align-items: center;
+			max-width: 300px;
+		}
+        #producto img{
+            height: 120px;
+            width: 150px;
+        }
+		h1{
+			font-size: 40px;
+		}
+		p{
+			font-size: 18px
+		}
+		button{
+			font-size: 18px;
+		}
+		table th{
+			text-align: center;
+		}
+		tr{
+			text-align: center;
+			justify-content: center;
+			align-items: center;
+			
+		}
+		h1{
+			font-size: 20px;
+			font-weight: bold;
+		}
+    </style>
+  </head>
+  <body>
+    <!-- Elementos de HTML-->
+	<div id="misdatos">
+		<h1> <b>Lista De Articulos</b> </h1>
+	</div>
+	<hr>
+<div id="container">
+	<div id="productos">
+        <div id="producto">
+            <img src="https://i5.walmartimages.com.mx/mg/gm/3pp/asr/841bedf7-fd81-4aa9-9e2b-9c46c95e5ccb.06c634b6e442f21b8e47587d3bb4e327.png?odnHeight=612&odnWidth=612&odnBg=FFFFFF" alt="monitor">
+			<p > <b>Monitor</b> <br>Samsung LED <br> <b>Precio:</b> 22830</p>
+			<button onclick="agregarmonitor()">AGREGAR</button>
+        </div>
+        <div id="producto">
+            <img src="https://m.media-amazon.com/images/I/51vSkNLO73L._AC_UF894,1000_QL80_.jpg" alt="Teclado">
+			<p> <b>Teclado</b> <br> Game Factor KBG500 <br> <b>Precio:</b> 712</p>	
+			<button onclick="agregarTeclado()">AGREGAR</button>
+
+		</div>
+        <div id="producto">
+            <img src="https://m.media-amazon.com/images/I/516LT-kaCoL._AC_UF894,1000_QL80_.jpg" alt="Mouse">
+			<p> <b>Mouse</b> <br> Logitech G502<br> <b>Precio:</b> 1400</p>
+			<button onclick="agregarMouse()">AGREGAR</button>
+	</div>
+        <div id="producto">
+            <img src="https://m.media-amazon.com/images/I/71LP40TtRHL.jpg" alt="Audifonos">
+			<p> <b>Audifonos</b> <br> FIFINE H6 <br> <b>Precio:</b> 1218</p>
+			<button onclick="agregarAudifonos()">AGREGAR</button>
+	</div>
+	</div>
+</div>
+	<div class="container">
+		<table id="tabla" data-height="460" data-auto-refresh="true">
+			<thead>
+				<tr>
+					<th data-field="Nombre">Nombre</th>
+					<th data-field="Precio">Precio</th>
+					<th data-field="descuento">Descuento</th>
+					<th data-field="PrecioFinal">Precio Final</th>			
+					<th data-field="imagen">Imagen</th>		
+				</tr>
+			</thead>
+		</table>
+	</div>
+	<div id="misdatos">
+		<hr>
+		<h1>Proyecto Final: Mi venta de artículos</h1>
+		<h1>Pérez Delgado Carlos Kenai</h1>    
+		<h1>carlo.perez2997@alumnos.udg.mx</h1>
+		<h1>Preparatoria San José Del Valle</h1>
+		<h1>Programacion III</h1>
+		<h1>Angel Emmanuel Sanchez Cuenca</h1> <hr>
+		<h1>Copyright © Todos los derechos reservados</h1>
+	</div>	
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script> 
+		$(function () {
+			$('#tabla').bootstrapTable({
+				data: datos,
+				formatNoMatches: function () {
+					return 'No hay datos';
+				}
+			});
+		});
+		var datos = []
+		function muestraDatos(){
+			$('#tabla').bootstrapTable('load', datos);
+		}
+		function agregarmonitor(){
+			var descuento = prompt("Digita el descuento: ");
+			var monitor ={
+				Nombre: "Monitor Corridos Tumbados",
+				Precio: 2830,
+				descuento: "$" + descuento + " pesos",
+				PrecioFinal: 2830 - descuento + " pesos",
+				imagen: "<img width=\"100\" heigth=\"100\" src=\"https://i5.walmartimages.com.mx/mg/gm/3pp/asr/841bedf7-fd81-4aa9-9e2b-9c46c95e5ccb.06c634b6e442f21b8e47587d3bb4e327.png?odnHeight=612&odnWidth=612&odnBg=FFFFFF\" >",
+			}
+			datos.push(monitor);
+			muestraDatos();
+		}
+		function agregarTeclado(){
+			var descuento = prompt("Digita el descuento: ");
+			var Teclado ={
+				Nombre: "Teclado Game Factor KBG500",
+				Precio: 712,
+				descuento: "$" + descuento + " pesos",
+				PrecioFinal: 712 - descuento + " pesos",
+				imagen: "<img width=\"100\" heigth=\"100\" src=\"https://m.media-amazon.com/images/I/51vSkNLO73L._AC_UF894,1000_QL80_.jpg\" >",
+			}
+			datos.push(Teclado);
+			muestraDatos();
+		}
+		function agregarMouse(){
+
+			var descuento = prompt("Digita el descuento: ");
+			var Mouse ={
+				Nombre: "Mouse Logitech G502",
+				Precio: 1400
+,
+				descuento: "$" + descuento + " pesos",
+				PrecioFinal: 1400 - descuento + " pesos",
+				imagen: "<img width=\"100\" heigth=\"100\" src=\"https://m.media-amazon.com/images/I/516LT-kaCoL._AC_UF894,1000_QL80_.jpg\" >",
+			}
+			datos.push(Mouse);
+			muestraDatos();
+		}
+		function agregarAudifonos(){
+			var descuento = prompt("Digita el descuento: ");
+			var Audifonos ={
+				Nombre: "Audifonos FIFINE H6",
+				Precio: 1218,
+				descuento: "$" + descuento + " pesos",
+				PrecioFinal: 1218 - descuento + " pesos",
+				imagen: "<img width=\"100\" heigth=\"100\" src=\"https://m.media-amazon.com/images/I/71LP40TtRHL.jpg\" >",
+			}
+			datos.push(Audifonos);
+			muestraDatos();
+		}
+  </script>
+</html>
+    
